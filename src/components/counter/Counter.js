@@ -2,7 +2,7 @@ import React, {useRef} from "react";
 import Proptypes from "prop-types";
 
 function Counter({title, count, incrementCount, decrementCount}) {
-  const interval = useRef(6);
+  const interval = useRef(0);
 
   const startAction = (action) => {
     if (interval.current) clearInterval(interval.current);
