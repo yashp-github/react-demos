@@ -51,6 +51,7 @@ Counter.prototype = {
   count: Proptypes.number.isRequired,
   incrementCount: Proptypes.func.isRequired,
   decrementCount: Proptypes.func.isRequired,
+  resetCounter: Proptypes.func.isRequired,
 };
 
 export default React.memo(Counter);
