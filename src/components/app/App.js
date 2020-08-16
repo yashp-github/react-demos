@@ -1,8 +1,12 @@
-import React from 'react';
+import React from "react";
+import { HashRouter } from "react-router-dom";
+import HomePage from "../home_page/HomePage";
 
 function App() {
   return (
-    <h1>React demos</h1>
+    <HashRouter>
+      <HomePage/>
+    </HashRouter>
   );
 }
 
