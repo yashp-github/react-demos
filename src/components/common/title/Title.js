@@ -3,7 +3,7 @@ import Proptypes from "prop-types";
 
 function Title({title, subtitle}) {
   return (
-    <div className="jumbotron text-center">
+    <div className="text-center">
       <h1>{title}</h1>
       <p>{subtitle}</p>
     </div>
