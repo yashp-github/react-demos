@@ -46,7 +46,7 @@ function Counter({title, count, incrementCount, decrementCount, resetCounter}) {
   );
 }
 
-Counter.prototype = {
+Counter.propTypes = {
   title: Proptypes.string.isRequired,
   count: Proptypes.number.isRequired,
   incrementCount: Proptypes.func.isRequired,
