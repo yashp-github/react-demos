@@ -3,18 +3,25 @@ import Title from "../common/title/Title";
 import Counter from "./Counter";
 
 function MainCounter() {
-  const [incrementByCount, setIncrementByCount] = useState(0);
+  const [incrementByCount, setIncrementByCount] = useState(1);
   const [count, setCount] = useState(0);
 
   const increaseIncrementByCount = useCallback(() => setIncrementByCount(oldCount => oldCount + 1), []);
   const decreaseIncrementByCount = useCallback(() => {
-    if (incrementByCount <= 0) return;
+    if (incrementByCount <= 1) return;
 
     setIncrementByCount(oldCount => oldCount - 1);
   }, [incrementByCount]);
+  const resetIncrementByCount = useCallback(() => setIncrementByCount(1), []);
 
   const incrementCount = useCallback(() => setCount(oldCount => oldCount + incrementByCount), [incrementByCount]);
   const decrementCount = useCallback(() => setCount(oldCount => oldCount - incrementByCount), [incrementByCount]);
+  const resetCount = useCallback(() => setCount(0), []);
+
+  const resetBothCounts = useCallback(() => {
+    resetIncrementByCount();
+    resetCount();
+  }, [resetIncrementByCount,resetCount]);
 
   return (
     <>
@@ -30,6 +37,7 @@ function MainCounter() {
         count={incrementByCount}
         incrementCount={increaseIncrementByCount}
         decrementCount={decreaseIncrementByCount}
+        resetCounter={resetIncrementByCount}
       />
       <div className="my-5"/>
       <Counter
@@ -37,7 +45,16 @@ function MainCounter() {
         count={count}
         incrementCount={incrementCount}
         decrementCount={decrementCount}
+        resetCounter={resetCount}
       />
+      <div className="d-flex justify-content-center my-5">
+      <button
+        type="button"
+        className="btn btn-primary mx-2"
+        onClick={resetBothCounts}>
+        Reset Both
+      </button>
+      </div>
     </>
   );
 }
