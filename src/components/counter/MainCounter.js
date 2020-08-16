@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import Title from "../common/title/Title";
 import Counter from "./Counter";
 
@@ -6,15 +6,15 @@ function MainCounter() {
   const [incrementByCount, setIncrementByCount] = useState(0);
   const [count, setCount] = useState(0);
 
-  const increaseIncrementByCount = () => setIncrementByCount(oldCount => oldCount + 1);
-  const decreaseIncrementByCount = () => {
+  const increaseIncrementByCount = useCallback(() => setIncrementByCount(oldCount => oldCount + 1), []);
+  const decreaseIncrementByCount = useCallback(() => {
     if (incrementByCount <= 0) return;
 
     setIncrementByCount(oldCount => oldCount - 1);
-  };
+  }, [incrementByCount]);
 
-  const incrementCount = () => setCount(oldCount => oldCount + incrementByCount);
-  const decrementCount = () => setCount(oldCount => oldCount - incrementByCount);
+  const incrementCount = useCallback(() => setCount(oldCount => oldCount + incrementByCount), [incrementByCount]);
+  const decrementCount = useCallback(() => setCount(oldCount => oldCount - incrementByCount), [incrementByCount]);
 
   return (
     <>
