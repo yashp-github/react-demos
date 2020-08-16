@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import Proptypes from "prop-types";
 
-function Counter({title, count, incrementCount, decrementCount}) {
+function Counter({title, count, incrementCount, decrementCount, resetCounter}) {
   const interval = useRef(0);
 
   const startAction = (action) => {
@@ -33,6 +33,12 @@ function Counter({title, count, incrementCount, decrementCount}) {
             onMouseUp={() => endAction()}
             onClick={decrementCount}>
             Decrement
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary mx-2"
+            onClick={resetCounter}>
+            Reset
           </button>
         </div>
       </div>
