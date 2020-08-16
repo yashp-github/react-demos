@@ -1,8 +1,17 @@
-import React from "react";
-import {Switch, HashRouter, Link} from "react-router-dom";
+import React, {useCallback} from "react";
+import {Switch, HashRouter, Link, withRouter} from "react-router-dom";
 import MainCounter from "../counter/MainCounter";
+import TodoPage from "../todo/TodoPage";
+import './css/HomePageStyle.css';
 
-function HomePage() {
+function HomePage({location}) {
+  const currentRoute = location.pathname;
+
+  const isActive = useCallback((route) => route === currentRoute, [currentRoute]);
+
+  const isActiveMemo = useCallback((route)=> isActive(route),[isActive]);
+
+  console.log(isActiveMemo('/'));
   return (
     <>
       <nav
@@ -17,11 +26,16 @@ function HomePage() {
         <div className="row">
 
           <nav className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div className="sidebar-sticky pt-3">
+            <div className="pt-3">
             <ul className="nav flex-column">
               <li className="nav-item">
-                <Link className="nav-link active" to="/">
+                <Link className={`nav-link ${isActiveMemo('/') && 'active'}`} to="/">
                   Counter
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className={`nav-link ${isActiveMemo('/todo') && 'active'}`} to="/todo">
+                  Todo
                 </Link>
               </li>
             </ul>
@@ -33,6 +47,9 @@ function HomePage() {
               <HashRouter exact path="/">
                 <MainCounter/>
               </HashRouter>
+              <HashRouter exact path="/todo">
+                <TodoPage/>
+              </HashRouter>
             </Switch>
           </main>
 
@@ -42,4 +59,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default withRouter(HomePage);
